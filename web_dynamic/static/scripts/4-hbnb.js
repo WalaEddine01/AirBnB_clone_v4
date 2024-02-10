@@ -1,20 +1,20 @@
-document.addEventListener("DOMContentLoaded", function() {
-    $('button').click(function() {
-        var amenities = [];
-        $('input[type="checkbox"]:checked').each(function() {
-            amenities.push({
-                id: $(this).attr('data-id'),
-                name: $(this).attr('data-name')
-            });
-            $.ajax({
-                type: 'POST',
-                url: 'http://localhost:5001/api/v1/places_search',
-                contentType: 'application/json',
-                data: JSON.stringify({ amenities: amenities })
-            }).done(function(data) {
-                for (const place of data) {
-                    const article = ['<article>',
-                        '<div class="title_box">',
+document.addEventListener('DOMContentLoaded', function () {
+  $('button').click(function () {
+    const amenities = [];
+    $('input[type="checkbox"]:checked').each(function () {
+      amenities.push({
+        id: $(this).attr('data-id'),
+        name: $(this).attr('data-name')
+      });
+      $.ajax({
+        type: 'POST',
+        url: 'http://localhost:5001/api/v1/places_search',
+        contentType: 'application/json',
+        data: JSON.stringify({ amenities })
+      }).done(function (data) {
+        for (const place of data) {
+          const article = ['<article>',
+            '<div class="title_box">',
                         `<h2>${place.name}</h2>`,
                         `<div class="price_by_night">$${place.price_by_night}</div>`,
                         '</div>',
@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", function() {
                         `${place.description}`,
                         '</div>',
                         '</article>'];
-                    $('.places').append(article.join(''));
-                }
-            });
-            });
+          $('.places').append(article.join(''));
+        }
+      });
     });
+  });
 });
 document.addEventListener('DOMContentLoaded', function () {
   const url = 'http://localhost:5001/api/v1/places_search';
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
     type: 'POST',
     url,
     contentType: 'application/json',
-    data: JSON.stringify({}),
+    data: JSON.stringify({})
   }).done(function (data) {
     for (const place of data) {
       const article = ['<article>',
